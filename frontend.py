@@ -9,11 +9,11 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Turing Machine Visualization")
 
 rules = [
-    ['1R1', '1L1'],
-    ['1L0', '0L2'],
-    ['1RH', '1L3'],
-    ['1R3', '0R0']
-] 
+    ['1RB', '1LB'],
+    ['1LA', '0LC'],
+    ['---', '1LD'],
+    ['1RD', '0RA']
+] # BB(4) champion, should halt after BB(4)=107 steps
 tm = turing.TuringMachine(rules, start_length=3)
 
 font = pygame.font.SysFont(None, 48)
@@ -86,7 +86,7 @@ while running:
         screen.blit(text[i], text[i].get_rect(center=rect[i].center))
     screen.blit(current_rule, (0, 0))
     for i in range(len(rules) + 1):
-        if i > 1: screen.blit(font.render("Rule: " + str(i - 1), True, (200, 0, 0)), (WIDTH/2 - 150, 50 + i * 50))
+        if i > 1: screen.blit(font.render("Rule: " + chr(ord('@') + i - 1), True, (200, 0, 0)), (WIDTH/2 - 150, 50 + i * 50))
         screen.blit(font.render(rules_txt[i][0], True, (200, 0, 0)), (WIDTH/2, 50 + i * 50))
         screen.blit(font.render(rules_txt[i][1], True, (200, 0, 0)), (WIDTH/2 + 100, 50 + i * 50))
 
