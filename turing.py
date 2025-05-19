@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 
 class TuringMachine:
-	def __init__(self, instructions, start_length=3):
+	def __init__(self, instructions, initial_tape=[0, 0, 0]):
 		self.rules = instructions
 		self.number_of_rules = len(self.rules)
-		self.number_sequence = [0, 0, 0]
-		for i in range(2, start_length):
-			self.number_sequence.append(0)
+		self.number_sequence = initial_tape
 		self.current_pos = 1
 		self.current_rule = 0
 		self.x = self.number_sequence[self.current_pos]
@@ -67,5 +65,5 @@ if __name__ == "__main__":
 	while not tm.done:
 		print(repr(tm))
 		tm.next_move()
-		
+
 	print(repr(tm))

@@ -4,7 +4,8 @@ A simple implementation of a Turing Machine simulator with Python3, and Pygame v
 
 ## Features
 
-- Simulate Turing Machines with customizable states
+- Simulate Turing Machines with any number of states
+- Customisable initial tape conditions
 - Step-by-step execution and visualization
 - Front-end GUI
 
@@ -16,6 +17,8 @@ For the GUI front-end, `pygame` is required.
 ## Front-end Visualisation
 To execute the GUI, run `frontend.py` 
 
+Press space to move execute the next step, and press the right arrow key to fast-forward 10 steps. 
+
 ![Turing Machine GUI Screenshot](Screenshot.png)
 
 ## Class Usage
@@ -26,12 +29,13 @@ The class `TuringMachine` can be found in `turing.py`, with the following usage:
 from turing import TuringMachine
 
 instruction = [
-    ['1RB', '1LB'],
-    ['1LA', '0LC'],
-    ['---', '1LD'],
-    ['1RD', '0RA']
-] # BB(4) champion; should halt after BB(4)=107 steps
-tm = TuringMachine(instruction)
+    # 0      1 
+    ['1RB', '1LB'], # Rule A
+    ['1LA', '0LC'], # Rule B
+    ['---', '1LD'], # Rule C
+    ['1RD', '0RA']  # Rule D
+] # BB(4) champion instruction; should halt after BB(4)=107 steps
+tm = TuringMachine(instruction, initial_tape=[0, 0, 0])
 
 print(repr(tm))
 while not tm.done:

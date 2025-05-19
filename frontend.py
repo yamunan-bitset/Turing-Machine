@@ -14,7 +14,7 @@ rules = [
     ['---', '1LD'],
     ['1RD', '0RA']
 ] # BB(4) champion, should halt after BB(4)=107 steps
-tm = turing.TuringMachine(rules, start_length=3)
+tm = turing.TuringMachine(rules)
 
 font = pygame.font.SysFont(None, 48)
 
@@ -54,24 +54,30 @@ while running:
             if not tm.done:
                 if event.key == pygame.K_SPACE:
                     tm.next_move()
-                    rect = []
-                    num_rows = 1
-                    start_row = (HEIGHT // 60 - num_rows) // 2
-                    for row in range(start_row, start_row + num_rows):
-                        for col in range(1, len(tm.number_sequence)):
-                            rect.append(pygame.Rect(col * 60, row * 60, 60, 60))
-                    
-                    current_rule = font.render("Current rule: " + str(rules[tm.current_rule]), True, (200, 0, 0))
+                if event.key == pygame.K_RIGHT:
+                    for _ in range(10):
+                        try: tm.next_move()
+                        except AssertionError: 
+                            tm.done = True 
+                            break
+                rect = []
+                num_rows = 1
+                start_row = (HEIGHT // 60 - num_rows) // 2
+                for row in range(start_row, start_row + num_rows):
+                    for col in range(1, len(tm.number_sequence)):
+                        rect.append(pygame.Rect(col * 60, row * 60, 60, 60))
+                
+                try: current_rule = font.render("Current rule: " + str(rules[tm.current_rule]), True, (200, 0, 0))
+                except IndexError: pass
 
-                    text = []
-                    for i in range(1, len(tm.number_sequence)):
-                        text.append(font.render(str(tm.number_sequence[i]), True, (200, 0, 0)))
+                text = []
+                for i in range(1, len(tm.number_sequence)):
+                    text.append(font.render(str(tm.number_sequence[i]), True, (200, 0, 0)))
 
     screen.fill((173, 216, 230))
 
     for x in range(0, WIDTH, 60):
         pygame.draw.line(screen, (50, 50, 50), (x, 0), (x, HEIGHT))
-
     for y in range(0, HEIGHT, 60):
         pygame.draw.line(screen, (50, 50, 50), (0, y), (WIDTH, y))
 
