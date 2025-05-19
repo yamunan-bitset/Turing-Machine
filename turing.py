@@ -64,11 +64,8 @@ if __name__ == "__main__":
         ] # Should halt after BB(4)=107 steps
 	tm = TuringMachine(rules)
 
-	#print("Step 0:", (tm.number_sequence, tm.current_pos, tm.current_rule))
-	print(repr(tm))
-	halted = False
-	while not halted:
-		x = tm.next_move()
+	while not tm.done:
 		print(repr(tm))
-		if x == "HLT!! Turing machine halted.":
-			halted = True
+		tm.next_move()
+		
+	print(repr(tm))

@@ -86,9 +86,9 @@ while running:
         screen.blit(text[i], text[i].get_rect(center=rect[i].center))
     screen.blit(current_rule, (0, 0))
     for i in range(len(rules) + 1):
-        if i > 1: screen.blit(font.render("Rule: " + chr(ord('@') + i - 1), True, (200, 0, 0)), (WIDTH/2 - 150, 50 + i * 50))
-        screen.blit(font.render(rules_txt[i][0], True, (200, 0, 0)), (WIDTH/2, 50 + i * 50))
-        screen.blit(font.render(rules_txt[i][1], True, (200, 0, 0)), (WIDTH/2 + 100, 50 + i * 50))
+        if i > 1: screen.blit(font.render("Rule: " + chr(ord('@') + i - 1), True, (200, 0, 0)), (WIDTH/2 + 150, 50 + i * 50))
+        screen.blit(font.render(rules_txt[i][0], True, (200, 0, 0)), (WIDTH/2 + 300, 50 + i * 50))
+        screen.blit(font.render(rules_txt[i][1], True, (200, 0, 0)), (WIDTH/2 + 400, 50 + i * 50))
 
     pygame.draw.rect(screen, (0, 200, 0), rect[tm.current_pos - 1], 2)
 
